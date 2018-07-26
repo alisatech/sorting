@@ -27,4 +27,28 @@ describe('Bubble Sort', function () {
         expect(bubbleSort(['dog', 'banana', 'ant', 'apple', 'mango', 'cat'])).toEqual(['ant', 'apple', 'banana', 'cat', 'dog', 'mango']);
 
     });
+
+    beforeAll(function () {
+        spyOn(bubbleSort, 'swap').and.callThrough();
+        spyOn(bubbleSort, 'comparator').and.callThrough();
+    });
+
+    it('it calls both methods once on unsorted array of length 2', function () {
+        bubbleSort([2, 1]);
+        expect(bubbleSort.comparator.calls.count()).toEqual(1);
+        expect(bubbleSort.swap.calls.count()).toEqual(1);
+    });
+
+    it('it calls comparator once on sorted array of length 2', function () {
+        bubbleSort([4, 5]);
+        expect(bubbleSort.comparator.calls.count()).toEqual(1);
+        expect(bubbleSort.swap.calls.count()).toEqual(0);
+    });
+
+    it('it calls comparator and swap only when necessary', function () {
+        bubbleSort([6, 0, 18, 4, 31]);
+        expect(bubbleSort.comparator.calls.count()).toEqual(1);
+        expect(bubbleSort.swap.calls.count()).toEqual(0);
+    });
+
 });
