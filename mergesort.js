@@ -24,12 +24,19 @@ function merge(firstHalf, secondHalf) {
 function mergeSort(array) {
 
     if (array.length < 2) return array;
+    let halves = split(array);
+    return merge(mergeSort(halves[0]), mergeSort(halves[1]));
 
-    let result = [], halves = split(array);
-    if (halves[0].length > 1) {
-        halves[0] = mergeSort(halves[0]);
-        halves[1] = mergeSort(halves[1]);
-    }
-    result = merge(...halves)
-    return result;
 }
+
+// function mergeSort(array) {
+
+//     if (array.length < 2) return array;
+
+//     let result = [], halves = split(array);
+//     halves[0] = mergeSort(halves[0]);
+//     halves[1] = mergeSort(halves[1]);
+
+//     result = merge(...halves)
+//     return result;
+// }
